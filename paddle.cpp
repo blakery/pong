@@ -21,7 +21,7 @@ Paddle::~Paddle() {
 
 void Paddle::up() {
     
-    if( (paddle_top + paddle_length) < BOTTOM_WALL_OFFSET) {
+    if( (paddle_top + paddle_length) < TOP_WALL_OFFSET) {
         erase();
         paddle_top++;
         draw();
@@ -33,7 +33,7 @@ void Paddle::up() {
 
 void Paddle::down() {
 
-    if( (paddle_top) > TOP_WALL_OFFSET) {
+    if( (paddle_top + paddle_length) < BOTTOM_WALL_OFFSET) {
         erase();
         paddle_top--;
         draw();
@@ -63,7 +63,6 @@ void Paddle::erase() {
         move(y+i, x);
         addch(' ');
     }
- //   refresh();
 }
 
 

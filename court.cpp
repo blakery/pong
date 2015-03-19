@@ -13,6 +13,8 @@
 Court::Court() {
     initscr();
     noecho();
+    curs_set(0);
+    cbreak();
     drawLines();
 
     drawScore(0, 0);

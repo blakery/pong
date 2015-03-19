@@ -12,7 +12,7 @@
 
 void play();
 int round();
-
+void quit();
 
 int main() {
     play();
@@ -52,13 +52,25 @@ int round() {
     Ball b;
     Paddle p;
     
+    while(char ch=getch()) {
+        switch (ch) {
+            case 'q': quit(); break;
+            case 'w': p.up(); break;
+            case 's': p.down(); break;
+            default: continue;
 
+        }
+    }
     srandom( (int)time(NULL) );
     return (random() % 2) + 1;
 }
 
 
 
+// FIXME: this will eventually prompt
+void quit() {
+    endwin();
+    exit(0);
 
-
+}
 
