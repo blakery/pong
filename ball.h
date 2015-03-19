@@ -6,7 +6,7 @@ class Ball {
 
 public:
     Ball();
-    void move();
+    void move_ball();
     void serve();
 
   //  Tuple location();
@@ -17,4 +17,5 @@ private:
     int y_loc;
     int x_move;
     int y_move;  
+    void draw(int, int);
 };

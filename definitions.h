@@ -5,6 +5,9 @@
 
 #define BALL_START_X (COLS / 2)
 #define BALL_START_Y (LINES / 2)
+
+
+
 #define SPEED_MAX (LINES / 10)
 #define PADDLE_START_TOP (LINES / 2)
 

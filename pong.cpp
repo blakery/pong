@@ -5,8 +5,13 @@
 #include "definitions.h"
 
 
+#include <stdlib.h>
+#include <unistd.h>
+#include <time.h>
+
+
 void play();
-void round();
+int round();
 
 
 int main() {
@@ -16,26 +21,41 @@ int main() {
 
 
 
-
 void play() {
     int p1Score = 0;
     int p2Score = 0;
-    Court court;    
+    Court *court = new Court();    
 
     while(p1Score < SCORE_MAX && p2Score < SCORE_MAX) {
-        round();
-        court.drawScore(p1Score, p2Score);    
+        sleep(2);
+
+        int player = round();
+
+        if(player == 1) { p1Score++; 
+        } else if(player == 2) { p2Score++; 
+        }
+        
+        court->drawScore(p1Score, p2Score);  
+        
     }
         
 }
 
 
-
-
-void round() {
+/* int round()
+ * returns: 
+ *      0 if no player scored (can't happen atm)
+ *      1 if player 1 scored
+ *      2 if player 2 scored
+ */
+int round() {
     Ball b;
     Paddle p;
-
+    
+    
+    // just return 1 or 2 at random for now
+    srandom( (int)time(NULL) );
+    return (random() % 2) + 1;
 }
 
 

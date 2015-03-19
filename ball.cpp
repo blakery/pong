@@ -6,20 +6,23 @@
 
 #include <stdio.h>
 
-
+#define BALL_CHAR '*'
 
 
 
 Ball::Ball() {
     x_loc = BALL_START_X;
     y_loc = BALL_START_Y;
+    
+    draw(x_loc, y_loc);
 
 }
 
 
-void Ball::move() {
+void Ball::move_ball() {
     x_loc += x_move;
     y_loc += y_move;
+
 }
 
 
@@ -34,3 +37,10 @@ void Ball::serve() {
 
 }
 
+
+void Ball::draw(int x, int y) {
+    
+    move(y, x);
+    addch(BALL_CHAR);
+    refresh();
+}

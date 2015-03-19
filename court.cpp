@@ -26,6 +26,7 @@ void Court::drawScore(int p1, int p2) {
 
     sprintf(str, "SCORE: %d - %d", p1, p2);
     x = printToScreen( (const char *)str, x, y);
+    refresh();
 }
 
 
