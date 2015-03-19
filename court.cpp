@@ -6,15 +6,17 @@
 
 
 
-#define VERT_WALL_CHAR ('|')
-#define HORZ_WALL_CHAR ('_')
+#define VERT_WALL_CHAR ACS_VLINE
+#define HORZ_WALL_CHAR ACS_HLINE
 
 
 Court::Court() {
     initscr();
+    noecho();
     drawLines();
+
     drawScore(0, 0);
-    refresh();
+
 }
 
 
@@ -25,6 +27,8 @@ void Court::drawScore(int p1, int p2) {
     char str[256];
 
     sprintf(str, "SCORE: %d - %d", p1, p2);
+  //  move(y, x);
+//    addchstr( (const char *) &str);
     x = printToScreen( (const char *)str, x, y);
     refresh();
 }
@@ -58,7 +62,7 @@ void Court::drawLines(){
     drawBottomLine();
     drawLeftLine();
     drawRightLine();
-    
+    refresh();
 }
 
 
@@ -86,17 +90,27 @@ void drawBottomLine() {
 void drawLeftLine() {
     int x = 0 + VERT_WALL_OFFSET;
 
-    for(int y=TOP_WALL_OFFSET+1; y < LINES - BOTTOM_WALL_OFFSET+1; y++) {
+    move(TOP_WALL_OFFSET, x);
+    addch(ACS_ULCORNER);
+    move(BOTTOM_WALL_OFFSET+1, x);
+    addch(ACS_LLCORNER); 
+    for(int y=TOP_WALL_OFFSET+1; y < LINES - BOTTOM_WALL_OFFSET; y++) {
         move(y, x);
         addch(VERT_WALL_CHAR);
     }
+       
 }
 
 
 void drawRightLine() {
     int x = COLS - VERT_WALL_OFFSET;
     
-    for(int y=TOP_WALL_OFFSET+1; y < LINES - BOTTOM_WALL_OFFSET+1; y++) {
+    move(TOP_WALL_OFFSET, x);
+    addch(ACS_URCORNER);
+    move(BOTTOM_WALL_OFFSET+1, x);
+    addch(ACS_LRCORNER);
+    
+    for(int y=TOP_WALL_OFFSET+1; y < LINES - BOTTOM_WALL_OFFSET; y++) {
         move(y, x);
         addch(VERT_WALL_CHAR);
     }

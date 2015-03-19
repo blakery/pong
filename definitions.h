@@ -9,7 +9,8 @@
 
 
 #define SPEED_MAX (LINES / 10)
-#define PADDLE_START_TOP (LINES / 2)
+
+#define PADDLE_START_TOP ((LINES / 3) + 1)
 
 #define TOP_WALL_OFFSET 1
 #define BOTTOM_WALL_OFFSET 3
