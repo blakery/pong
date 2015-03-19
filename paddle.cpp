@@ -63,7 +63,7 @@ void Paddle::erase() {
         move(y+i, x);
         addch(' ');
     }
-    refresh();
+ //   refresh();
 }
 
 

@@ -52,16 +52,7 @@ int round() {
     Ball b;
     Paddle p;
     
-    p.up();
-    sleep(1);
-    p.down();
-    sleep(1);
-    p.down();
-    p.down();
-    sleep(1);
-    p.up();
-    sleep(1);
-    // just return 1 or 2 at random for now
+
     srandom( (int)time(NULL) );
     return (random() % 2) + 1;
 }
