@@ -123,6 +123,9 @@ int Ball::bounce(Paddle *left_paddle, Paddle *right_paddle) {
     
     if(left_paddle) {
         if(x_loc == VERT_WALL_OFFSET+1) { return 2;
+        } else if(left_paddle->contact(x_loc, y_loc)) {
+            x_dir *= -1;
+            return 0;
         }
     } else if(x_loc == VERT_WALL_OFFSET+1) {
         x_dir *= -1;
@@ -131,6 +134,9 @@ int Ball::bounce(Paddle *left_paddle, Paddle *right_paddle) {
     
     if(right_paddle) {
         if(x_loc == COLS - (VERT_WALL_OFFSET+1)) { return 1;
+        } else if(right_paddle->contact(x_loc, y_loc)) {
+            x_dir *= -1;
+            return 0;
         }
     } else if(x_loc == COLS - (VERT_WALL_OFFSET+1)) {
         x_dir *= -1;

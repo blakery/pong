@@ -56,16 +56,16 @@ int round() {
     b.serve();
     while( !(score = b.move_ball(&p, NULL)) ) {
         char ch=getch();
-        b.set_move(); // FIXME: implement timer
-        /*switch (ch) {
+
+        switch (ch) {
             case 'q': quit(); break;
             case 'w': p.up(); break;
             case 's': p.down(); break;
             
             case KEY_UP: p.up(); break;
             case KEY_DOWN: p.down(); break;
-            default:;
-        }*/
+            default: b.set_move(); // FIXME: implement timer;
+        }
     }
  //   srandom( (int)time(NULL) );
     return score;
