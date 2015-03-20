@@ -96,13 +96,13 @@ void drawLeftLine() {
 
     move(TOP_WALL_OFFSET, x);
     addch(ACS_ULCORNER);
-    move(BOTTOM_WALL_OFFSET+1, x);
-    addch(ACS_LLCORNER); 
+    
     for(int y=TOP_WALL_OFFSET+1; y < LINES - BOTTOM_WALL_OFFSET; y++) {
         move(y, x);
         addch(VERT_WALL_CHAR);
     }
-       
+    move(LINES-BOTTOM_WALL_OFFSET, x);
+    addch(ACS_LLCORNER);   
 }
 
 
@@ -111,12 +111,12 @@ void drawRightLine() {
     
     move(TOP_WALL_OFFSET, x);
     addch(ACS_URCORNER);
-    move(BOTTOM_WALL_OFFSET+1, x);
-    addch(ACS_LRCORNER);
     
     for(int y=TOP_WALL_OFFSET+1; y < LINES - BOTTOM_WALL_OFFSET; y++) {
         move(y, x);
         addch(VERT_WALL_CHAR);
     }
+    move(LINES-BOTTOM_WALL_OFFSET, x);
+    addch(ACS_LRCORNER);
 }
 

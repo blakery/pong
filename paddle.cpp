@@ -77,11 +77,25 @@ void Paddle::draw() {
 
 /* int Paddle::contact(int x, int y)
  * returns non-zero if (x, y) are in contact with the paddle.
- * at some point positive or negative, or the magnitude of the number
+ * returns -1 if the ball is inside the paddle (same x and y as a paddle char)
+ * at some point the magnitude of the number
  * may become significant in, but not yet.
  */
 int Paddle::contact(int x, int y) {
-
-
-    return 0;
+    if(x == paddle_axis) {
+        if(y > paddle_top && y < paddle_top + paddle_length) {
+            return -1;
+        } else if (y == paddle_top-1) { return 1;
+        } else if (y == paddle_top + paddle_length + 1) { return 1;
+        } else { return 0;
+        }
+    } else if(x == paddle_axis + 1 || x == paddle_axis - 1) {
+        if(y > paddle_top && y < paddle_top + paddle_length) {
+            return 1;
+        } else { return 0;
+        }
+    } else { return 0;
+    }
 }
+
+

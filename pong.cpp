@@ -62,8 +62,18 @@ int round() {
             case KEY_UP: p.up(); break;
             case KEY_DOWN: p.down(); break;
             default:;
-
         }
+/*        b.move_ball();
+        int x = b.get_x_location();
+        int y = b.get_y_location();
+        if(int bounce_direction = p.contact(x, y)) {
+        //    b.bounce(bounce_direction);
+        } // FIXME: when a second paddle is added add second check here
+        else if(x == VERT_WALL_OFFSET+1) {
+            return 1; // player 1 has scored
+        } else if(x == COLS - VERT_WALL_OFFSET - 1) {
+            return 2; // player 2 has scored
+        } */
     }
     srandom( (int)time(NULL) );
     return (random() % 2) + 1;
