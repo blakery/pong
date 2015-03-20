@@ -52,9 +52,10 @@ int round() {
     Ball b;
     Paddle p;
     
+    b.serve();
     while(1) {
         char ch=getch();
-        switch (ch) {
+        /*switch (ch) {
             case 'q': quit(); break;
             case 'w': p.up(); break;
             case 's': p.down(); break;
@@ -62,9 +63,11 @@ int round() {
             case KEY_UP: p.up(); break;
             case KEY_DOWN: p.down(); break;
             default:;
-        }
-/*        b.move_ball();
-        int x = b.get_x_location();
+        }*/
+        b.set_move();
+        b.move_ball();
+
+  /*      int x = b.get_x_location();
         int y = b.get_y_location();
         if(int bounce_direction = p.contact(x, y)) {
         //    b.bounce(bounce_direction);
@@ -74,6 +77,7 @@ int round() {
         } else if(x == COLS - VERT_WALL_OFFSET - 1) {
             return 2; // player 2 has scored
         } */
+
     }
     srandom( (int)time(NULL) );
     return (random() % 2) + 1;

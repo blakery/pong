@@ -7,8 +7,9 @@
 #define BALL_START_Y (LINES / 2)
 
 
-
-#define SPEED_MAX (LINES / 10)
+// lower number is faster
+#define SPEED_MAX (100000)
+#define SPEED_MIN (2500000)
 
 #define PADDLE_START_TOP ((LINES / 3) + 1)
 
