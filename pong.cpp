@@ -52,12 +52,16 @@ int round() {
     Ball b;
     Paddle p;
     
-    while(char ch=getch()) {
+    while(1) {
+        char ch=getch();
         switch (ch) {
             case 'q': quit(); break;
             case 'w': p.up(); break;
             case 's': p.down(); break;
-            default: continue;
+            
+            case KEY_UP: p.up(); break;
+            case KEY_DOWN: p.down(); break;
+            default:;
 
         }
     }

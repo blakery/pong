@@ -11,10 +11,12 @@
 
 
 Court::Court() {
-    initscr();
-    noecho();
-    curs_set(0);
-    cbreak();
+    
+    initscr();   // initialize ncurses
+    noecho();    // don't echo typed characters
+    curs_set(0); // don't show blinking cursor
+    cbreak();    // don't wait for return key
+    nodelay(stdscr, TRUE);  // don't block
     drawLines();
 
     drawScore(0, 0);

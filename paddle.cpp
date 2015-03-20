@@ -19,28 +19,6 @@ Paddle::~Paddle() {
 
 }
 
-void Paddle::up() {
-    
-    if( (paddle_top + paddle_length) < TOP_WALL_OFFSET) {
-        erase();
-        paddle_top++;
-        draw();
-    }
-    
-
-}
-
-
-void Paddle::down() {
-
-    if( (paddle_top + paddle_length) < BOTTOM_WALL_OFFSET) {
-        erase();
-        paddle_top--;
-        draw();
-    }
-    
-
-}
 
 void Paddle::reset() {
     erase();
@@ -48,6 +26,26 @@ void Paddle::reset() {
     draw();
 
 }
+
+void Paddle::up() {  
+    if( paddle_top > TOP_WALL_OFFSET+1) {
+        erase();
+        paddle_top--;
+        draw();
+    }
+}
+
+
+void Paddle::down() {
+
+    if( (paddle_top + paddle_length) < LINES - BOTTOM_WALL_OFFSET) {
+        erase();
+        paddle_top++;
+        draw();
+    } 
+}
+
+
 
 /* void Paddle::erase() 
  * should be called before envoking draw and before setting the paddle to
