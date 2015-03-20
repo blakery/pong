@@ -9,7 +9,7 @@ public:
     ~Ball();
     void serve();
     void set_move();
-    void move_ball();
+    int move_ball();
 
 
     int get_x_location();
@@ -28,5 +28,5 @@ private:
     int x_dir;
     int y_dir;
     void draw(int, int);
-    void bounce();
+    int bounce();
 };

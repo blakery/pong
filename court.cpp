@@ -61,7 +61,6 @@ void drawLeftLine();
 void drawRightLine();
 
 void Court::drawLines(){
-
     drawTopLine();
     drawBottomLine();
     drawLeftLine();
@@ -93,14 +92,13 @@ void drawBottomLine() {
 
 void drawLeftLine() {
     int x = 0 + VERT_WALL_OFFSET;
-
-    move(TOP_WALL_OFFSET, x);
-    addch(ACS_ULCORNER);
     
     for(int y=TOP_WALL_OFFSET+1; y < LINES - BOTTOM_WALL_OFFSET; y++) {
         move(y, x);
         addch(VERT_WALL_CHAR);
     }
+    move(TOP_WALL_OFFSET, x);
+    addch(ACS_ULCORNER);    
     move(LINES-BOTTOM_WALL_OFFSET, x);
     addch(ACS_LLCORNER);   
 }
@@ -108,14 +106,13 @@ void drawLeftLine() {
 
 void drawRightLine() {
     int x = COLS - VERT_WALL_OFFSET;
-    
-    move(TOP_WALL_OFFSET, x);
-    addch(ACS_URCORNER);
-    
+
     for(int y=TOP_WALL_OFFSET+1; y < LINES - BOTTOM_WALL_OFFSET; y++) {
         move(y, x);
         addch(VERT_WALL_CHAR);
     }
+    move(TOP_WALL_OFFSET, x);
+    addch(ACS_URCORNER);    
     move(LINES-BOTTOM_WALL_OFFSET, x);
     addch(ACS_LRCORNER);
 }

@@ -61,10 +61,12 @@ void Ball::set_move() {
     y_move++; 
 }
 
-
-void Ball::move_ball() {    
+/* int Ball::move_ball()
+ * Returns: 1 if player 1 has scored, 2 if player 2 has scored, 0 otherwise
+ */
+int Ball::move_ball() {    
     
-    if(x_move < x_speed && y_move < y_speed) { return; }
+    if(x_move < x_speed && y_move < y_speed) { return 0; }
     if(x_move >= x_speed) {
         draw(x_loc + x_dir, y_loc);
         x_move = 0;
@@ -73,7 +75,7 @@ void Ball::move_ball() {
         draw(x_loc, y_loc + y_dir);
         y_move = 0;
     }
-        bounce();    
+    return bounce();    
 }
 
 
@@ -104,15 +106,20 @@ void Ball::draw(int x, int y) {
     refresh();
 }
 
-
-void Ball::bounce() {
+/* int Ball::bounce()
+ * Returns: 1 if player 1 has scored, 2 if player 2 has scored, 0 otherwise
+ */
+int Ball::bounce() {
     if( (y_loc == TOP_WALL_OFFSET+1) 
     ||  (y_loc == (LINES - BOTTOM_WALL_OFFSET)-1) ) {
         y_dir *= -1;
     }
     
-    if( (x_loc == VERT_WALL_OFFSET+1) 
-    ||  (x_loc == COLS - (VERT_WALL_OFFSET+1)) ) {
-        x_dir *= -1;
+    if(x_loc == VERT_WALL_OFFSET+1) { return 2;
+    } else if(x_loc == COLS - (VERT_WALL_OFFSET-1)) { return 1;
+
+    } else { return 0;
     }
+        //x_dir *= -1;    
 }
+
