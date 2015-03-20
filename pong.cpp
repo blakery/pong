@@ -54,7 +54,7 @@ int round() {
     int score;
     
     b.serve();
-    while( !(score = b.move_ball()) ) {
+    while( !(score = b.move_ball(&p, NULL)) ) {
         char ch=getch();
         b.set_move(); // FIXME: implement timer
         /*switch (ch) {

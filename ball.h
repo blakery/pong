@@ -1,6 +1,5 @@
 
-
-
+class Paddle;
 
 class Ball {
 
@@ -9,7 +8,7 @@ public:
     ~Ball();
     void serve();
     void set_move();
-    int move_ball();
+    int move_ball(Paddle *, Paddle *);
 
 
     int get_x_location();
@@ -28,5 +27,5 @@ private:
     int x_dir;
     int y_dir;
     void draw(int, int);
-    int bounce();
+    int bounce(Paddle *, Paddle *);
 };

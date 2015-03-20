@@ -3,15 +3,14 @@
 #include <time.h>
 #include "definitions.h"
 #include "ball.h"
+#include "paddle.h"
 
 #include <stdio.h>
 
 #define BALL_CHAR '*'
 
 
-
 Ball::Ball() {
-
     x_loc = BALL_START_X;
     y_loc = BALL_START_Y;
     x_move =0;
@@ -24,11 +23,13 @@ Ball::Ball() {
     draw(BALL_START_X, BALL_START_Y);
 }
 
+
 Ball::~Ball() {
     move(y_loc, x_loc);
     addch(' ');
     refresh();
 }
+
 
 
 void Ball::serve() {
@@ -40,8 +41,8 @@ void Ball::serve() {
     if(x_speed < SPEED_MAX ) { x_speed = SPEED_MAX; }
     if(y_speed < SPEED_MAX ) { y_speed = SPEED_MAX; }
 
-    x_speed = SPEED_MIN;
-    y_speed = SPEED_MIN;
+    //x_speed = SPEED_MIN;
+    //y_speed = SPEED_MIN;
     
     // make sure the ball always serves towards a player
     if(x_speed > y_speed) {
@@ -61,10 +62,10 @@ void Ball::set_move() {
     y_move++; 
 }
 
-/* int Ball::move_ball()
+/* int Ball::move_ball(Paddle *left_paddle, Paddle *right_paddle)
  * Returns: 1 if player 1 has scored, 2 if player 2 has scored, 0 otherwise
  */
-int Ball::move_ball() {    
+int Ball::move_ball(Paddle *left_paddle, Paddle *right_paddle) {    
     
     if(x_move < x_speed && y_move < y_speed) { return 0; }
     if(x_move >= x_speed) {
@@ -75,7 +76,7 @@ int Ball::move_ball() {
         draw(x_loc, y_loc + y_dir);
         y_move = 0;
     }
-    return bounce();    
+    return bounce(left_paddle, right_paddle);    
 }
 
 
@@ -106,20 +107,36 @@ void Ball::draw(int x, int y) {
     refresh();
 }
 
-/* int Ball::bounce()
- * Returns: 1 if player 1 has scored, 2 if player 2 has scored, 0 otherwise
+/* int Ball::bounce(Paddle left_paddle, Paddle right_paddle)
+ * Checks to see if the ball has bounced off of a surface (walls or a paddle).
+ * One or both paddles may be NULL. If this is the case, the corresponding side
+ *      will not score (ie: playing against one's self, or just bouncing around)
+ * Returns nonzero if a player has scored:
+ *      1 if player 1 has scored
+ *      2 if player 2 has scored
  */
-int Ball::bounce() {
+int Ball::bounce(Paddle *left_paddle, Paddle *right_paddle) {
     if( (y_loc == TOP_WALL_OFFSET+1) 
     ||  (y_loc == (LINES - BOTTOM_WALL_OFFSET)-1) ) {
         y_dir *= -1;
     }
     
-    if(x_loc == VERT_WALL_OFFSET+1) { return 2;
-    } else if(x_loc == COLS - (VERT_WALL_OFFSET-1)) { return 1;
-
-    } else { return 0;
+    if(left_paddle) {
+        if(x_loc == VERT_WALL_OFFSET+1) { return 2;
+        }
+    } else if(x_loc == VERT_WALL_OFFSET+1) {
+        x_dir *= -1;
+        return 0;
     }
-        //x_dir *= -1;    
+    
+    if(right_paddle) {
+        if(x_loc == COLS - (VERT_WALL_OFFSET+1)) { return 1;
+        }
+    } else if(x_loc == COLS - (VERT_WALL_OFFSET+1)) {
+        x_dir *= -1;
+        return 0;
+    }
+    return 0;
 }
+
 
