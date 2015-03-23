@@ -53,10 +53,13 @@ void play(int nPlayers) {
 int round(Paddle *p1, Paddle *p2) {
     Ball b;
     int score = 0;
-    
-    b.serve();
+    char ch;
+
+    while( !(ch=getch()) ) {
+    }
+    b.serve();    
     while( !(score) ) {
-        char ch=getch();
+        ch = getch();
 
         switch (ch) {
             case 'q': // this could return

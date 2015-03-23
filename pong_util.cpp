@@ -20,11 +20,26 @@ void fatal_error(const char *s) {
 
 /* void quit()
  * used for voluntary, user requested exits.
- * FIXME: this should eventually prompt
+ * FIXME: this should eventually prompt, and return if the user elects not
+ * to exit
  */
 void quit() {
-    endwin();
-    exit(0);
+    int message_y = LINES/2;
+    int message_x = (COLS/2) - VERT_WALL_OFFSET;
+    char ch;
+    
+    printToScreen("Quit? y/n", message_x, message_y);
+    while( TRUE ) {
+        switch (ch = getch()) {
+            case 'y':
+                endwin();
+                exit(0);
+            case 'n': 
+                printToScreen("         ", message_x, message_y);
+                return;
+            default:;
+        }
+    }
 }
 
 
