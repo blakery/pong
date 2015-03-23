@@ -15,6 +15,7 @@ public:
     void set_timer();
     static void set_move(int);    
     void checkPaddleBounce(Paddle *left_paddle, Paddle *right_paddle);
+    
 private:
     int x_loc;
     int y_loc;
@@ -28,6 +29,8 @@ private:
     int bounce(Paddle *, Paddle *);
     int checkLeftBounce(Paddle *);
     int checkRightBounce(Paddle *);
+    
+    void alterSpeed();
     
     void enable_timer();
     void disable_timer();    

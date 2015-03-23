@@ -48,13 +48,14 @@ Ball::~Ball() {
 
 
 void Ball::serve() {
+    draw(BALL_START_X, BALL_START_Y);
     srandom( (int)time(NULL) );
     
-    x_speed = random() % SPEED_MIN;
-    y_speed = random() % SPEED_MIN;
+    x_speed = random() % BALL_SPEED_MIN;
+    y_speed = random() % BALL_SPEED_MIN;
 
-    if(x_speed < SPEED_MAX ) { x_speed = SPEED_MAX; }
-    if(y_speed < SPEED_MAX ) { y_speed = SPEED_MAX; }
+    if(x_speed < BALL_SPEED_MAX ) { x_speed = BALL_SPEED_MAX; }
+    if(y_speed < BALL_SPEED_MAX ) { y_speed = BALL_SPEED_MAX; }
     
     // make sure the ball always serves towards a player
     if(x_speed > y_speed) {
@@ -224,7 +225,13 @@ int Ball::checkRightBounce(Paddle *p) {
 }
 
 
+void Ball::alterSpeed() {
 
+    srandom( (int)time(NULL) );
+    
+    x_speed += (random() % BALL_SPEED_MODIFIER) % BALL_SPEED_MIN;
+    y_speed += (random() % BALL_SPEED_MODIFIER) % BALL_SPEED_MIN;
+}
 
 
 
