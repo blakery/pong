@@ -59,7 +59,9 @@ int round(Paddle *p1, Paddle *p2) {
         char ch=getch();
 
         switch (ch) {
-            case 'q': quit(); break; // this could return
+            case 'q': // this could return
+                quit();         
+                break; 
             case 'w': 
                 p1->up(); 
                 b.checkPaddleBounce(p1, p2);
@@ -73,7 +75,6 @@ int round(Paddle *p1, Paddle *p2) {
                 break;     
             default: score = b.move_ball(p1, p2);
         }
-      //  b.set_move(0);
     }
     return score;
 }

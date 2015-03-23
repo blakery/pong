@@ -38,9 +38,7 @@ Ball::Ball() {
 
 
 Ball::~Ball() {
-    disable_timer(); /*timer*/
-   // move(y_loc, x_loc);
-   // addch(' ');
+    disable_timer(); 
     draw(BALL_START_X, BALL_START_Y);
     refresh();
 
@@ -68,7 +66,7 @@ void Ball::serve() {
     if(random() % 2) { x_dir *= -1; }
     if(random() % 2) { y_dir *= -1; }    
 
-    set_timer(); /*timer*/
+    set_timer(); 
 }
 
 
@@ -117,7 +115,7 @@ int Ball::move_ball(Paddle *left_paddle, Paddle *right_paddle) {
     if(x_move < x_speed && y_move < y_speed) { return 0; 
     } else {
 
-        disable_timer();/*timer*/  
+        disable_timer();
         int x = x_loc ;
         int y = y_loc;
         if(x_move >= x_speed) {
@@ -130,7 +128,7 @@ int Ball::move_ball(Paddle *left_paddle, Paddle *right_paddle) {
         }
         draw(x, y);
         int b = bounce(left_paddle, right_paddle);   
-        enable_timer(); /*timer*/
+        enable_timer();
         return b;
     }
 }
