@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <curses.h>
-#include "definitions.h"
+#include "pong_util.h"
 #include "court.h"
 
 
@@ -15,7 +15,7 @@ Court::Court() {
     initscr();   // initialize ncurses
     noecho();    // don't echo typed characters
     curs_set(0); // don't show blinking cursor
-    cbreak();    // don't wait for return key
+   // cbreak();    // don't wait for return key
     nodelay(stdscr, TRUE);  // don't block
     drawLines();
 
@@ -38,15 +38,7 @@ void Court::drawScore(int p1, int p2) {
 }
 
 
-// returns the new position of x
-int Court::printToScreen(const char *str, int x, int y) {
-    
-    for(int i=0; i < strlen(str); i++) {
-        move(y, x++);
-        addch(str[i]);
-    }
-    return x;
-}
+
 
 
 

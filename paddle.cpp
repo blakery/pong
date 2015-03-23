@@ -5,17 +5,30 @@
 #define PADDLE_CHAR ACS_VLINE
 
 Paddle::Paddle() {
+
     paddle_length = 3;
     paddle_top = PADDLE_START_TOP;
-    // FIXME: add the ability to specify which paddle, and have the 
-    //        axis change to match
     paddle_axis = VERT_WALL_OFFSET + 2;
     
     draw();
 }
 
+Paddle::Paddle(int side) {
+    paddle_length = 3;
+    paddle_top = PADDLE_START_TOP;
+
+    if(side == 1) {
+        paddle_axis = VERT_WALL_OFFSET + 2;
+    } else if(side == 2) {
+        paddle_axis = COLS - (VERT_WALL_OFFSET + 2);
+    } else {
+        paddle_axis = VERT_WALL_OFFSET + 2;
+    }
+    draw();
+}
+
 Paddle::~Paddle() {
-    reset();
+    erase();
 
 }
 

@@ -1,3 +1,5 @@
+#ifndef COURT_H
+#define COURT_H
 
 /* class Court 
  * The pong court
@@ -13,10 +15,8 @@ public:
 
 private:
     void drawLines();
-    int printToScreen(const char *, int, int);
-
 };
 
 
 
-
+#endif //COURT_H

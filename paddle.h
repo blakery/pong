@@ -1,10 +1,11 @@
-
-
+#ifndef PADDLE_H
+#define PADDLE_H
 
 class Paddle {
 
 public:
     Paddle();
+    Paddle(int side);    
     ~Paddle();
     void up();
     void down();
@@ -23,4 +24,4 @@ private:
 };
 
 
-
+#endif

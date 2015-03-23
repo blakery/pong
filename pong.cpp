@@ -1,18 +1,18 @@
+#include <stdlib.h>
+//#include <unistd.h>
 #include <curses.h>
 #include "ball.h"
 #include "paddle.h"
 #include "court.h"
-#include "definitions.h"
+#include "pong_util.h"
 
 
-#include <stdlib.h>
-#include <unistd.h>
-#include <time.h>
 
 
 void play();
 int round();
-void quit();
+
+
 
 int main() {
     play();
@@ -27,18 +27,13 @@ void play() {
     Court *court = new Court();    
 
     while(p1Score < SCORE_MAX && p2Score < SCORE_MAX) {
-        sleep(1);
-
         int player = round();
 
         if(player == 1) { p1Score++; 
         } else if(player == 2) { p2Score++; 
         }
-        
         court->drawScore(p1Score, p2Score);  
-        
     }
-        
 }
 
 
@@ -50,33 +45,35 @@ void play() {
  */
 int round() {
     Ball b;
-    Paddle p;
-    int score;
+    Paddle p1;// = new Paddle(1); 
+   // Paddle *p2;// = NULL;// = new Paddle(2); 
+    int score = 0;
     
     b.serve();
-    while( !(score = b.move_ball(&p, NULL)) ) {
+    while( !(score) ) {
         char ch=getch();
 
         switch (ch) {
-            case 'q': quit(); break;
-            case 'w': p.up(); break;
-            case 's': p.down(); break;
-            
-            case KEY_UP: p.up(); break;
-            case KEY_DOWN: p.down(); break;
-            default: b.set_move(); // FIXME: implement timer;
+            case 'q': quit(); break; // this could return
+            case 'w': 
+                p1.up(); 
+                b.checkPaddleBounce(&p1, (Paddle *) NULL);
+                break;
+            case 's': 
+                p1.down();
+                b.checkPaddleBounce(&p1, (Paddle *) NULL);
+                break;     
+            case 'p':
+                pause();
+                break;     
+            default: score = b.move_ball(&p1, NULL);
         }
+        b.set_move(0);
     }
- //   srandom( (int)time(NULL) );
     return score;
 }
 
 
 
-// FIXME: this should eventually prompt
-void quit() {
-    endwin();
-    exit(0);
 
-}
 

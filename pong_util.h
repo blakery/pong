@@ -1,6 +1,5 @@
-#ifndef DEFINITIONS_H
-#define DEFINITIONS_H
-
+#ifndef PONG_UTIL_H
+#define PONG_UTIL_H
 
 #include <curses.h>
 
@@ -9,10 +8,10 @@
 
 
 // lower number is faster
-#define SPEED_MAX (100000)
-#define SPEED_MIN (1000000)
+#define SPEED_MAX (50000)
+#define SPEED_MIN (100000)
 
-#define BALL_UPDATE_INTERVAL 100
+#define BALL_UPDATE_INTERVAL 1000
 
 
 #define PADDLE_START_TOP ((LINES / 3) + 1)
@@ -24,6 +23,13 @@
 
 #define SCORE_MAX 10
 
-#endif //DEFINITIONS_H
+void fatal_error(const char *s);
+void quit();
+void pause();
+int printToScreen(const char *str, int x, int y);
 
+
+
+
+#endif // PONG_ERRORS_H
 
