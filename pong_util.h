@@ -8,10 +8,10 @@
 
 
 // lower number is faster
-#define SPEED_MAX (50000)
-#define SPEED_MIN (100000)
+#define SPEED_MAX (50)
+#define SPEED_MIN (100)
 
-#define BALL_UPDATE_INTERVAL 1000
+#define BALL_UPDATE_INTERVAL 500000
 
 
 #define PADDLE_START_TOP ((LINES / 3) + 1)
@@ -21,7 +21,7 @@
 #define VERT_WALL_OFFSET 3
 
 
-#define SCORE_MAX 10
+#define SCORE_MAX 5
 
 void fatal_error(const char *s);
 void quit();

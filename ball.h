@@ -32,9 +32,12 @@ private:
     void enable_timer();
     void disable_timer();    
 
-    
+    static int x_move;
+    static int y_move; 
 
-    
+    static timer_t timerid;
+    static struct itimerspec itimer;
+    static struct timespec interval;
 };
 
 

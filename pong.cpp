@@ -9,31 +9,38 @@
 
 
 
-void play();
-int round();
+void play(int);
+int round(Paddle *, Paddle *);
 
 
 
 int main() {
-    play();
+    play(1);
     return 0;
 }
 
 
 
-void play() {
+void play(int nPlayers) {
     int p1Score = 0;
     int p2Score = 0;
+    Paddle *p1 = NULL;
+    Paddle *p2 = NULL;
+    
     Court *court = new Court();    
 
+    if(nPlayers >= 1) { p1 = new Paddle(1); }
+    if(nPlayers == 2) { p2 = new Paddle(2); }
+
     while(p1Score < SCORE_MAX && p2Score < SCORE_MAX) {
-        int player = round();
+        int player = round(p1, p2);
 
         if(player == 1) { p1Score++; 
         } else if(player == 2) { p2Score++; 
         }
         court->drawScore(p1Score, p2Score);  
     }
+    
 }
 
 
@@ -43,10 +50,8 @@ void play() {
  *      1 if player 1 scored
  *      2 if player 2 scored
  */
-int round() {
+int round(Paddle *p1, Paddle *p2) {
     Ball b;
-    Paddle p1;// = new Paddle(1); 
-   // Paddle *p2;// = NULL;// = new Paddle(2); 
     int score = 0;
     
     b.serve();
@@ -56,19 +61,19 @@ int round() {
         switch (ch) {
             case 'q': quit(); break; // this could return
             case 'w': 
-                p1.up(); 
-                b.checkPaddleBounce(&p1, (Paddle *) NULL);
+                p1->up(); 
+                b.checkPaddleBounce(p1, p2);
                 break;
             case 's': 
-                p1.down();
-                b.checkPaddleBounce(&p1, (Paddle *) NULL);
+                p1->down();
+                b.checkPaddleBounce(p1, p2);
                 break;     
             case 'p':
                 pause();
                 break;     
-            default: score = b.move_ball(&p1, NULL);
+            default: score = b.move_ball(p1, p2);
         }
-        b.set_move(0);
+       // b.set_move(0);
     }
     return score;
 }
