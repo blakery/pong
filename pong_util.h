@@ -8,8 +8,8 @@
 
 
 // lower number is faster
-#define SPEED_MAX (50000)
-#define SPEED_MIN (100000)
+#define SPEED_MAX (50)
+#define SPEED_MIN (100)
 
 #define BALL_UPDATE_INTERVAL 500000
 
