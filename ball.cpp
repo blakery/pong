@@ -54,6 +54,7 @@ void Ball::serve() {
     x_speed = random() % BALL_SPEED_MIN;
     y_speed = random() % BALL_SPEED_MIN;
 
+    // This looks counter-intuitive, but note that lowe numbers are higher
     if(x_speed < BALL_SPEED_MAX ) { x_speed = BALL_SPEED_MAX; }
     if(y_speed < BALL_SPEED_MAX ) { y_speed = BALL_SPEED_MAX; }
     
@@ -116,7 +117,7 @@ int Ball::move_ball(Paddle *left_paddle, Paddle *right_paddle) {
     if(x_move < x_speed && y_move < y_speed) { return 0; 
     } else {
 
-        disable_timer();
+    //    disable_timer();
         int x = x_loc ;
         int y = y_loc;
         if(x_move >= x_speed) {
@@ -129,7 +130,7 @@ int Ball::move_ball(Paddle *left_paddle, Paddle *right_paddle) {
         }
         draw(x, y);
         int b = bounce(left_paddle, right_paddle);   
-        enable_timer();
+     //   enable_timer();
         return b;
     }
 }
@@ -162,6 +163,10 @@ int Ball::bounce(Paddle *left_paddle, Paddle *right_paddle) {
     // FIXME: the <= and >=, rather than == simply hide a bug where
     //        the ball can go past the wall. while this is preferable to
     //        the bug being obvious, it should still be fixed.
+    // NOTE: this is probably something else, since it's still happening.
+    //       some possibilities: - a race condition somewhere,
+    //              - interaction in corners / near both the side and a paddle
+    //              - a problem with the paddles somewhere
     if( (y_loc <= TOP_WALL_OFFSET+1) 
     ||  (y_loc >= (LINES - BOTTOM_WALL_OFFSET)-1) ) {
         y_dir = y_dir * (-1);
@@ -225,12 +230,17 @@ int Ball::checkRightBounce(Paddle *p) {
 }
 
 
-void Ball::alterSpeed() {
 
+void Ball::alterSpeed() {
+    //FIXME: alter so that the collision plane can be specified, 
+    //       and bounce changed accordingly
+    //       also possibly have the total speed decrease slightly with each 
+    //       non-paddle bounce
     srandom( (int)time(NULL) );
     
     x_speed += (random() % BALL_SPEED_MODIFIER) % BALL_SPEED_MIN;
     y_speed += (random() % BALL_SPEED_MODIFIER) % BALL_SPEED_MIN;
+    
 }
 
 
