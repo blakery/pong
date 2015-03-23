@@ -16,11 +16,11 @@
 // definitions for static data members
 int Ball::x_move;
 int Ball::y_move; 
-
-
 timer_t Ball::timerid;
 struct itimerspec Ball::itimer;
 struct timespec Ball::interval;
+
+
 
 
 Ball::Ball() {
@@ -38,7 +38,7 @@ Ball::Ball() {
 
 
 Ball::~Ball() {
-  /*timer*/  disable_timer();
+ //   disable_timer(); /*timer*/
    // move(y_loc, x_loc);
    // addch(' ');
     draw(BALL_START_X, BALL_START_Y);
@@ -68,7 +68,7 @@ void Ball::serve() {
     if(random() % 2) { x_dir *= -1; }
     if(random() % 2) { y_dir *= -1; }    
 
-  /*timer*/  set_timer();
+  //  set_timer(); /*timer*/
 }
 
 
@@ -117,7 +117,7 @@ int Ball::move_ball(Paddle *left_paddle, Paddle *right_paddle) {
     if(x_move < x_speed && y_move < y_speed) { return 0; 
     } else {
 
-/*timer*/        disable_timer();
+//        disable_timer();/*timer*/  
         int x = x_loc ;
         int y = y_loc;
         if(x_move >= x_speed) {
@@ -130,7 +130,7 @@ int Ball::move_ball(Paddle *left_paddle, Paddle *right_paddle) {
         }
         draw(x, y);
         int b = bounce(left_paddle, right_paddle);   
-/*timer*/        enable_timer();
+  //      enable_timer(); /*timer*/
         return b;
     }
 }
@@ -233,7 +233,7 @@ void set_signal(struct sigevent *);
 void Ball::set_timer() {
     struct sigevent signal;
 
-    if(!timerid) {    /*timer*/ 
+    if(!timerid) {     
         set_signal(&signal);
 
         if(timer_create(CLOCK_REALTIME, &signal, &timerid)) {

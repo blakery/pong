@@ -40,7 +40,7 @@ void play(int nPlayers) {
         }
         court->drawScore(p1Score, p2Score);  
     }
-    
+    endwin();
 }
 
 
@@ -73,7 +73,7 @@ int round(Paddle *p1, Paddle *p2) {
                 break;     
             default: score = b.move_ball(p1, p2);
         }
-       // b.set_move(0);
+        b.set_move(0);
     }
     return score;
 }
