@@ -8,7 +8,7 @@
 #define BALL_START_Y (getmaxy(curscr) / 2)
 #define BALL_SPEED_MAX (50)          // lower numbers are faster
 #define BALL_SPEED_MIN (100)         
-#define BALL_UPDATE_INTERVAL 800000
+#define BALL_UPDATE_INTERVAL 1000000
 #define BALL_SPEED_MODIFIER 10
 
 

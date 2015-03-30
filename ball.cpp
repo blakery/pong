@@ -221,11 +221,14 @@ void Ball::alterSpeed() {
     //       non-paddle bounce
     srandom( (int)time(NULL) );
     
-    x_speed += (random() % BALL_SPEED_MODIFIER) % BALL_SPEED_MIN;
-    if(x_speed < BALL_SPEED_MAX) { x_speed = BALL_SPEED_MAX; }
+    int adjust = random() % BALL_SPEED_MODIFIER;
+    if( random() % 2 ) { adjust *= -1; }
     
-    y_speed += (random() % BALL_SPEED_MODIFIER) % BALL_SPEED_MIN;
-    if(y_speed < BALL_SPEED_MAX) { y_speed = BALL_SPEED_MAX; }    
+    x_speed += adjust % BALL_SPEED_MIN;
+    y_speed -= adjust % BALL_SPEED_MIN;
+
+    if(y_speed < BALL_SPEED_MAX) { y_speed = BALL_SPEED_MAX; }  
+    if(x_speed < BALL_SPEED_MAX) { x_speed = BALL_SPEED_MAX; }  
 }
 
 
