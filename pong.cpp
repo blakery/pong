@@ -37,8 +37,8 @@ void play(int nPlayers) {
     while(p1Score < SCORE_MAX && p2Score < SCORE_MAX) {
         int player = round(p1, p2);
 
-        if(player == 1) { p1Score++; 
-        } else if(player == 2) { p2Score++; 
+        if(player == 2) { p1Score++; 
+        } else if(player == 1) { p2Score++; 
         }
         court->drawScore(p1Score, p2Score);  
         char ch;
@@ -97,7 +97,10 @@ int round(Paddle *p1, Paddle *p2) {
     int score = 0;
     char ch;
 
-    while( !(ch=getch()) ) {
+    while(TRUE) {
+        ch=getch();
+        if(ch == 'w' || ch == 's' || ch == 'i' || ch == 'k' || ch == 'p'
+           || ch == 'q'|| ch == ' ') { break; }
     }
     b.serve();    
     while( !(score) ) {
@@ -108,11 +111,17 @@ int round(Paddle *p1, Paddle *p2) {
                 quit(); // Note: this could return (quit() propts)         
                 break; 
             case 'w': 
-                p1->up(); 
+                if(p1) p1->up(); 
                 break;
             case 's': 
-                p1->down();
-                break;     
+                if(p1) p1->down();
+                break;
+            case 'i':
+                if(p2) p2->up(); 
+                break; 
+            case 'k':
+                if(p2) p2->down();
+                break;
             case 'p':
                 pause();
                 break;     

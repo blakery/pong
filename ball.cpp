@@ -170,7 +170,7 @@ int Ball::checkLeftBounce(Paddle *p) {
         // if a paddle is in play, score if it hits the wall 
         if(x_loc == VERT_WALL_OFFSET+1) { return 1;
         // bounce if the ball hits the paddle
-        } else if(p->contact(x_loc, y_loc) > 0) { 
+        } else if( p->contact(x_loc, y_loc) ) { 
             x_dir = x_dir * (-1);
             alterSpeed();
             return 0;
@@ -199,7 +199,7 @@ int Ball::checkRightBounce(Paddle *p) {
         // hit a defended wall => score
         if(x_loc ==  cols - (VERT_WALL_OFFSET+1) ) { return 2;
         // hit a paddle => bounce
-        } else if(p->contact(x_loc, y_loc) > 0) {
+        } else if(p->contact(x_loc, y_loc) ) {
             x_dir =  x_dir * (-1);
             alterSpeed();
             return 0;
