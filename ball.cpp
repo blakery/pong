@@ -64,7 +64,7 @@ void Ball::serve() {
         x_speed = y_speed;
         y_speed = x_speed;
     }
-    // randomize + or - direction
+    // randomize + or - for direction
     if(random() % 2) { x_dir *= -1; }
     if(random() % 2) { y_dir *= -1; }    
 
@@ -159,6 +159,8 @@ void Ball::checkPaddleBounce(Paddle *left_paddle, Paddle *right_paddle) {
  * checks to see of the ball has bounced off of the top or bottom walls
  */
 void Ball::checkYBounce() {
+    int lines = (getmaxy(curscr);
+
     // FIXME: the <= and >=, rather than == simply hide a bug where
     //        the ball can go past the wall. while this is preferable to
     //        the bug being obvious, it should still be fixed.
@@ -167,7 +169,7 @@ void Ball::checkYBounce() {
     //              - interaction in corners / near both the side and a paddle
     //              - a problem with the paddles somewhere
     if( (y_loc <= TOP_WALL_OFFSET+1 )
-        ||  (y_loc >= (getmaxy(curscr) - BOTTOM_WALL_OFFSET)-1) ) {
+        ||  (y_loc >= lines - BOTTOM_WALL_OFFSET)-1) ) {
         y_dir = y_dir * (-1);
     }
 }
@@ -207,15 +209,17 @@ int Ball::checkLeftBounce(Paddle *p) {
  */
 int Ball::checkRightBounce(Paddle *p) {
     // FIXME: see bug in Ball::bounce()
+    int cols = getmaxx(curscr);
+    
     if(p) {
         // hit a defended wall => score
-        if(x_loc <= getmaxx(curscr) - (VERT_WALL_OFFSET+1) ) { return 2;
+        if(x_loc <=  cols - (VERT_WALL_OFFSET+1) ) { return 2;
         // hit a paddle => bounce
         } else if(p->contact(x_loc, y_loc) >= 1) {
             x_dir =  x_dir * (-1);
             return 0;
         }
-    } else if(x_loc <= getmaxx(curscr) - (VERT_WALL_OFFSET+1) ) {
+    } else if(x_loc <= cols - (VERT_WALL_OFFSET+1) ) {
         // hit an undefended wall => bounce
         x_dir =  x_dir * (-1);
         return 0;

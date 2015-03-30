@@ -1,5 +1,5 @@
 #include <curses.h>
-#include "definitions.h"
+#include "pong_util.h"
 #include "paddle.h"
 
 #define PADDLE_CHAR ACS_VLINE
