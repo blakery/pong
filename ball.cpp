@@ -119,11 +119,11 @@ int Ball::move_ball(Paddle *left_paddle, Paddle *right_paddle) {
         if(x_move > x_speed) {
             x += x_dir;
             x_move = 0;
-            
+
             int score = checkLeftBounce(left_paddle)
                       + checkRightBounce(right_paddle);
-            draw(x, y);
             if(score) { return score;
+            } else { draw(x, y);
             }
         }  
         if(y_move > y_speed) {
@@ -138,21 +138,6 @@ int Ball::move_ball(Paddle *left_paddle, Paddle *right_paddle) {
 
     
 
-/* 
- * Called if a paddle is moved. This ensures that the ball will bounce
- * properly if the paddle moves in between ball refreshes.
- * In contrast to bounce() and it's helpers, this ONLY checks the paddle.
- * Does not check scoring, or return value.
- */
-void Ball::checkPaddleBounce(Paddle *left_paddle, Paddle *right_paddle) {
-    
-    if(left_paddle && left_paddle->contact(x_loc, y_loc)) {
-        x_dir *= (-1);
-    } else if(right_paddle && right_paddle->contact(x_loc, y_loc)) {
-        x_dir *= (-1);    
-    }
-
-}
 
 
 /* void Ball::checkYBounce()

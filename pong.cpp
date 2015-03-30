@@ -107,11 +107,9 @@ int round(Paddle *p1, Paddle *p2) {
                 break; 
             case 'w': 
                 p1->up(); 
-                //b.checkPaddleBounce(p1, p2);
                 break;
             case 's': 
                 p1->down();
-                //b.checkPaddleBounce(p1, p2);
                 break;     
             case 'p':
                 pause();

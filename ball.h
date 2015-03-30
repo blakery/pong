@@ -14,8 +14,6 @@ public:
     int score();
     void set_timer();
     static void set_move(int);    
-    void checkPaddleBounce(Paddle *left_paddle, Paddle *right_paddle);
-
     
 private:
     int x_loc;
