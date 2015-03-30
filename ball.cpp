@@ -114,24 +114,27 @@ void Ball::set_move(int signal) {
  */
 int Ball::move_ball(Paddle *left_paddle, Paddle *right_paddle) {         
         int x = x_loc;
-        int y = y_loc;
 
         if(x_move > x_speed) {
             x += x_dir;
-            x_move = 0;
 
+            draw(x, y_loc);
             int score = checkLeftBounce(left_paddle)
                       + checkRightBounce(right_paddle);
             if(score) { return score;
-            } else { draw(x, y);
+            } else { 
+
+                x_move = 0;
             }
-        }  
+        }
+        
+        int y = y_loc;
         if(y_move > y_speed) {
             y += y_dir;
-            y_move = 0;
-            draw(x, y);
+            draw(x_loc, y);
             checkYBounce();
-        } 
+            y_move = 0;
+        }
 
         return 0;
 }
@@ -146,16 +149,10 @@ int Ball::move_ball(Paddle *left_paddle, Paddle *right_paddle) {
 void Ball::checkYBounce() {
     int lines = getmaxy(curscr);
 
-    // FIXME: the <= and >=, rather than == simply hide a bug where
-    //        the ball can go past the wall. while this is preferable to
-    //        the bug being obvious, it should still be fixed.
-    // NOTE: this is probably something else, since it's still happening.
-    //       some possibilities: - a race condition somewhere,
-    //              - interaction in corners / near both the side and a paddle
-    //              - a problem with the paddles somewhere
-    if( (y_loc <= TOP_WALL_OFFSET+1 )
-        ||  (y_loc >= (lines - BOTTOM_WALL_OFFSET)-1) ) {
+    if( (y_loc == TOP_WALL_OFFSET+1 )
+        ||  (y_loc == (lines - BOTTOM_WALL_OFFSET)-1) ) {
         y_dir = y_dir * (-1);
+   //     alterSpeed();
     }
 }
 
@@ -168,17 +165,19 @@ void Ball::checkYBounce() {
  * returns 1 if the ball has scored on the left side, 0 if not.
  */
 int Ball::checkLeftBounce(Paddle *p) {
-        // FIXME: see bug in Ball::checkYBounce()
+
     if(p) {
         // if a paddle is in play, score if it hits the wall 
-        if(x_loc <= VERT_WALL_OFFSET+1) { return 1;
+        if(x_loc == VERT_WALL_OFFSET+1) { return 1;
         // bounce if the ball hits the paddle
-        } else if(p->contact(x_loc, y_loc) >= 1) {
+        } else if(p->contact(x_loc, y_loc) > 0) { 
             x_dir = x_dir * (-1);
+      //      alterSpeed();
             return 0;
         }
-    } else if(x_loc <= VERT_WALL_OFFSET+1) {
+    } else if(x_loc == VERT_WALL_OFFSET+1) {
         x_dir =  x_dir * (-1);
+     //   alterSpeed();
         return 0;
     } else return 0;
 }
@@ -193,19 +192,21 @@ int Ball::checkLeftBounce(Paddle *p) {
  * returns 2 if the ball has scored 0 if not.
  */
 int Ball::checkRightBounce(Paddle *p) {
-    // FIXME: see bug in Ball::bounce()
+
     int cols = getmaxx(curscr);
     
     if(p) {
         // hit a defended wall => score
-        if(x_loc <=  cols - (VERT_WALL_OFFSET+1) ) { return 2;
+        if(x_loc ==  cols - (VERT_WALL_OFFSET+1) ) { return 2;
         // hit a paddle => bounce
-        } else if(p->contact(x_loc, y_loc) >= 1) {
+        } else if(p->contact(x_loc, y_loc) > 0) {
             x_dir =  x_dir * (-1);
+           // alterSpeed();
             return 0;
         }
-    } else if(x_loc <= cols - (VERT_WALL_OFFSET+1) ) {
+    } else if(x_loc == cols - (VERT_WALL_OFFSET+1) ) {
         // hit an undefended wall => bounce
+     //   alterSpeed();
         x_dir =  x_dir * (-1);
         return 0;
     } else return 0;
