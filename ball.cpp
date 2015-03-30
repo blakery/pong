@@ -201,12 +201,12 @@ int Ball::checkRightBounce(Paddle *p) {
         // hit a paddle => bounce
         } else if(p->contact(x_loc, y_loc) > 0) {
             x_dir =  x_dir * (-1);
-           // alterSpeed();
+            alterSpeed();
             return 0;
         }
     } else if(x_loc == cols - (VERT_WALL_OFFSET+1) ) {
         // hit an undefended wall => bounce
-     //   alterSpeed();
+        alterSpeed();
         x_dir =  x_dir * (-1);
         return 0;
     } else return 0;
