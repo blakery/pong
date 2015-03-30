@@ -144,7 +144,7 @@ int Ball::move_ball(Paddle *left_paddle, Paddle *right_paddle) {
  * checks to see of the ball has bounced off of the top or bottom walls
  */
 void Ball::checkYBounce() {
-    int lines = (getmaxy(curscr);
+    int lines = getmaxy(curscr);
 
     // FIXME: the <= and >=, rather than == simply hide a bug where
     //        the ball can go past the wall. while this is preferable to
@@ -154,7 +154,7 @@ void Ball::checkYBounce() {
     //              - interaction in corners / near both the side and a paddle
     //              - a problem with the paddles somewhere
     if( (y_loc <= TOP_WALL_OFFSET+1 )
-        ||  (y_loc >= lines - BOTTOM_WALL_OFFSET)-1) ) {
+        ||  (y_loc >= (lines - BOTTOM_WALL_OFFSET)-1) ) {
         y_dir = y_dir * (-1);
     }
 }

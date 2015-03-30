@@ -84,6 +84,8 @@ void endOfGame(int p1Score, int p2Score) {
     }
 }
 
+
+
 /* int round()
  * returns: 
  *      0 if no player scored (can't happen atm)
@@ -102,8 +104,8 @@ int round(Paddle *p1, Paddle *p2) {
         ch = getch();
 
         switch (ch) {
-            case 'q': // this could return
-                quit();         
+            case 'q': 
+                quit(); // Note: this could return (quit() propts)         
                 break; 
             case 'w': 
                 p1->up(); 
