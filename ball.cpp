@@ -117,7 +117,7 @@ int Ball::move_ball(Paddle *left_paddle, Paddle *right_paddle) {
 
         if(x_move > x_speed) {
             x += x_dir;
-
+            // draw() changes the location, which we need to do before bouncing
             draw(x, y_loc);
             int score = checkLeftBounce(left_paddle)
                       + checkRightBounce(right_paddle);
@@ -152,7 +152,7 @@ void Ball::checkYBounce() {
     if( (y_loc == TOP_WALL_OFFSET+1 )
         ||  (y_loc == (lines - BOTTOM_WALL_OFFSET)-1) ) {
         y_dir = y_dir * (-1);
-   //     alterSpeed();
+        alterSpeed();
     }
 }
 
@@ -172,12 +172,12 @@ int Ball::checkLeftBounce(Paddle *p) {
         // bounce if the ball hits the paddle
         } else if(p->contact(x_loc, y_loc) > 0) { 
             x_dir = x_dir * (-1);
-      //      alterSpeed();
+            alterSpeed();
             return 0;
         }
     } else if(x_loc == VERT_WALL_OFFSET+1) {
         x_dir =  x_dir * (-1);
-     //   alterSpeed();
+        alterSpeed();
         return 0;
     } else return 0;
 }
