@@ -20,4 +20,4 @@ pong_util.o: pong_util.h pong_util.cpp
 	g++ pong_util.h pong_util.cpp -c
 
 clean:
-	rm *.o
+	rm *.o *.ghc pong

@@ -1,4 +1,6 @@
 #include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
 //#include <unistd.h>
 #include <curses.h>
 #include "ball.h"
@@ -11,7 +13,7 @@
 
 void play(int);
 int round(Paddle *, Paddle *);
-
+void endOfGame(int, int);
 
 
 int main() {
@@ -39,10 +41,48 @@ void play(int nPlayers) {
         } else if(player == 2) { p2Score++; 
         }
         court->drawScore(p1Score, p2Score);  
+        char ch;
+        while( !(ch=getch()) ) {;}
     }
-    endwin();
+    endOfGame(p1Score, p2Score);
 }
 
+
+void endOfGame(int p1Score, int p2Score) {
+    const char *winner;
+    int points;
+    char message[24];
+    
+    if(p1Score > p2Score) { 
+        winner = "Player 1";
+        points = p1Score;
+    } else { 
+        winner = "Player 2";
+        points = p2Score;
+    }
+    
+    sprintf(message, "%s won with %d points.", winner, points);
+    int y = getmaxy(curscr) /3;
+    int x = getmaxx(curscr) / 3;
+    printToScreen(message, x, y);
+    sprintf(message, "Play again? y/n");
+    printToScreen(message, x, y + 1);
+
+    while(TRUE) {
+        char ch = getch();
+        switch (ch) {
+            case 'y': 
+                printToScreen("                        ", x, y);
+                printToScreen("                        ", x, y+1);
+                play(1);
+                return;
+            case 'n':
+                endwin();
+                return;
+            default:;
+        }
+    }
+}
 
 /* int round()
  * returns: 
@@ -67,11 +107,11 @@ int round(Paddle *p1, Paddle *p2) {
                 break; 
             case 'w': 
                 p1->up(); 
-                b.checkPaddleBounce(p1, p2);
+                //b.checkPaddleBounce(p1, p2);
                 break;
             case 's': 
                 p1->down();
-                b.checkPaddleBounce(p1, p2);
+                //b.checkPaddleBounce(p1, p2);
                 break;     
             case 'p':
                 pause();

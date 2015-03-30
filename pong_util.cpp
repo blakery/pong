@@ -24,8 +24,8 @@ void fatal_error(const char *s) {
  * to exit
  */
 void quit() {
-    int message_y = LINES/2;
-    int message_x = (COLS/2) - VERT_WALL_OFFSET;
+    int message_y = getmaxy(curscr)/2;
+    int message_x = (getmaxx(curscr)/2) - VERT_WALL_OFFSET;
     char ch;
     
     printToScreen("Quit? y/n", message_x, message_y);
@@ -45,8 +45,8 @@ void quit() {
 
 
 void pause() {
-    int pause_y = LINES/2;
-    int pause_x = (COLS/2) - VERT_WALL_OFFSET;
+    int pause_y = getmaxy(curscr)/2;
+    int pause_x = (getmaxx(curscr)/2) - VERT_WALL_OFFSET;
 
     printToScreen("PAUSE", pause_x, pause_y);
     while(TRUE) {

@@ -15,6 +15,7 @@ public:
     void set_timer();
     static void set_move(int);    
     void checkPaddleBounce(Paddle *left_paddle, Paddle *right_paddle);
+
     
 private:
     int x_loc;
@@ -27,6 +28,7 @@ private:
     
     void draw(int, int);
     int bounce(Paddle *, Paddle *);
+    void checkYBounce();
     int checkLeftBounce(Paddle *);
     int checkRightBounce(Paddle *);
     

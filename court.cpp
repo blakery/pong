@@ -26,8 +26,8 @@ Court::Court() {
 
 
 void Court::drawScore(int p1, int p2) {
-    int y = LINES-2;
-    int x = COLS - 15;
+    int y = getmaxy(curscr)-2;
+    int x = getmaxx(curscr) - 15;
     char str[256];
 
     sprintf(str, "SCORE: %d - %d", p1, p2);
@@ -64,7 +64,7 @@ void Court::drawLines(){
 void drawTopLine() {
     int y = 0 + TOP_WALL_OFFSET;
     
-    for(int x=VERT_WALL_OFFSET; x < (COLS - VERT_WALL_OFFSET); x++) {
+    for(int x=VERT_WALL_OFFSET; x < (getmaxx(curscr) - VERT_WALL_OFFSET); x++) {
         move(y, x);
         addch(HORZ_WALL_CHAR);
     }
@@ -73,9 +73,9 @@ void drawTopLine() {
 
 
 void drawBottomLine() {
-    int y = LINES - BOTTOM_WALL_OFFSET;
+    int y = getmaxy(curscr) - BOTTOM_WALL_OFFSET;
     
-    for(int x=VERT_WALL_OFFSET; x < (COLS - VERT_WALL_OFFSET); x++) {
+    for(int x=VERT_WALL_OFFSET; x < (getmaxx(curscr) - VERT_WALL_OFFSET); x++) {
         move(y, x);
         addch(HORZ_WALL_CHAR);
     }
@@ -85,27 +85,27 @@ void drawBottomLine() {
 void drawLeftLine() {
     int x = 0 + VERT_WALL_OFFSET;
     
-    for(int y=TOP_WALL_OFFSET+1; y < LINES - BOTTOM_WALL_OFFSET; y++) {
+    for(int y=TOP_WALL_OFFSET+1; y < getmaxy(curscr) - BOTTOM_WALL_OFFSET; y++) {
         move(y, x);
         addch(VERT_WALL_CHAR);
     }
     move(TOP_WALL_OFFSET, x);
     addch(ACS_ULCORNER);    
-    move(LINES-BOTTOM_WALL_OFFSET, x);
+    move(getmaxy(curscr)-BOTTOM_WALL_OFFSET, x);
     addch(ACS_LLCORNER);   
 }
 
 
 void drawRightLine() {
-    int x = COLS - VERT_WALL_OFFSET;
+    int x = getmaxx(curscr) - VERT_WALL_OFFSET;
 
-    for(int y=TOP_WALL_OFFSET+1; y < LINES - BOTTOM_WALL_OFFSET; y++) {
+    for(int y=TOP_WALL_OFFSET+1; y < getmaxy(curscr) - BOTTOM_WALL_OFFSET; y++) {
         move(y, x);
         addch(VERT_WALL_CHAR);
     }
     move(TOP_WALL_OFFSET, x);
     addch(ACS_URCORNER);    
-    move(LINES-BOTTOM_WALL_OFFSET, x);
+    move(getmaxy(curscr)-BOTTOM_WALL_OFFSET, x);
     addch(ACS_LRCORNER);
 }
 

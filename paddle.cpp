@@ -20,7 +20,7 @@ Paddle::Paddle(int side) {
     if(side == 1) {
         paddle_axis = VERT_WALL_OFFSET + 2;
     } else if(side == 2) {
-        paddle_axis = COLS - (VERT_WALL_OFFSET + 2);
+        paddle_axis = getmaxx(curscr) - (VERT_WALL_OFFSET + 2);
     } else {
         paddle_axis = VERT_WALL_OFFSET + 2;
     }
@@ -51,7 +51,7 @@ void Paddle::up() {
 
 void Paddle::down() {
 
-    if( (paddle_top + paddle_length) < LINES - BOTTOM_WALL_OFFSET) {
+    if( (paddle_top + paddle_length) < getmaxy(curscr) - BOTTOM_WALL_OFFSET) {
         erase();
         paddle_top++;
         draw();
@@ -98,17 +98,17 @@ int Paddle::contact(int x, int y) {
     if(x == paddle_axis) {
         if(y > paddle_top && y < paddle_top + paddle_length) {
             return -1;
-        } else if (y == paddle_top-1) { return 1;
-        } else if (y == paddle_top + paddle_length + 1) { return 1;
-        } else { return 0;
+       // } else if (y == paddle_top-1) { return 1;
+        //} else if (y == paddle_top + paddle_length + 1) { return 1;
         }
+      // the ball is checked for scoring before paddle contact, 
+      // so there's no need to figure out which side of the paddle we care about
     } else if(x == paddle_axis + 1 || x == paddle_axis - 1) {
         if(y > paddle_top && y < paddle_top + paddle_length) {
             return 1;
-        } else { return 0;
         }
-    } else { return 0;
     }
+    return 0;
 }
 
 
