@@ -45,6 +45,16 @@ Ball::~Ball() {
 }
 
 
+/* Ball::x(), Ball::y()
+ * return the ball's location along the x and y axis', respectively
+ */
+int Ball::x() {
+    return x_loc;
+}
+int Ball::y() {
+    return y_loc;
+}
+
 
 
 void Ball::serve() {

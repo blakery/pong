@@ -14,6 +14,9 @@ public:
     int score();
     void set_timer();
     static void set_move(int);    
+    // get the ball's location on the x and y axis, respectively
+    int x();
+    int y();
     
 private:
     int x_loc;

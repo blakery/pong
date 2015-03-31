@@ -1,13 +1,12 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
-//#include <unistd.h>
 #include <curses.h>
 #include "ball.h"
 #include "paddle.h"
 #include "court.h"
 #include "pong_util.h"
-
+//#include "aipaddle.h"
 
 
 
@@ -31,8 +30,11 @@ void play(int nPlayers) {
     
     Court *court = new Court();    
 
-    if(nPlayers >= 1) { p1 = new Paddle(1); }
-    if(nPlayers == 2) { p2 = new Paddle(2); }
+    if(nPlayers >= 1) { }
+    if(nPlayers == 2) { p2 = new Paddle(2); 
+    }
+   // p1 = new Paddle(1); 
+   // p2 = new AIPaddle(2);
 
     while(p1Score < SCORE_MAX && p2Score < SCORE_MAX) {
         int player = round(p1, p2);
@@ -100,7 +102,10 @@ int round(Paddle *p1, Paddle *p2) {
     while(TRUE) {
         ch=getch();
         if(ch == 'w' || ch == 's' || ch == 'i' || ch == 'k' || ch == 'p'
-           || ch == 'q'|| ch == ' ') { break; }
+           || ch == ' ') { break; 
+        } else if(ch == 'q') { 
+            quit();
+        }
     }
     b.serve();    
     while( !(score) ) {
@@ -125,8 +130,13 @@ int round(Paddle *p1, Paddle *p2) {
             case 'p':
                 pause();
                 break;     
-            default: score = b.move_ball(p1, p2);
+            default: ;
+                
         }
+        
+
+        score = b.move_ball(p1, p2);
+
     }
     return score;
 }

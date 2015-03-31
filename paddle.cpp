@@ -33,6 +33,8 @@ Paddle::~Paddle() {
 }
 
 
+
+
 void Paddle::reset() {
     erase();
     paddle_top = PADDLE_START_TOP;

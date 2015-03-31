@@ -12,7 +12,7 @@ public:
     void reset();
     int contact(int x, int y);
 
-private: 
+protected: 
     int paddle_top;
     int paddle_axis;
 
