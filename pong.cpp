@@ -6,12 +6,12 @@
 #include "paddle.h"
 #include "court.h"
 #include "pong_util.h"
-//#include "aipaddle.h"
+#include "aipaddle.h"
 
 
 
 void play(int);
-int round(Paddle *, Paddle *);
+int round(Paddle *, AIPaddle *);
 void endOfGame(int, int);
 
 
@@ -26,15 +26,15 @@ void play(int nPlayers) {
     int p1Score = 0;
     int p2Score = 0;
     Paddle *p1 = NULL;
-    Paddle *p2 = NULL;
+    AIPaddle *p2 = NULL;
     
     Court *court = new Court();    
-
+/*
     if(nPlayers >= 1) { }
     if(nPlayers == 2) { p2 = new Paddle(2); 
-    }
-   // p1 = new Paddle(1); 
-   // p2 = new AIPaddle(2);
+    }*/
+    p1 = new Paddle(1); 
+    p2 = new AIPaddle(2);
 
     while(p1Score < SCORE_MAX && p2Score < SCORE_MAX) {
         int player = round(p1, p2);
@@ -43,8 +43,6 @@ void play(int nPlayers) {
         } else if(player == 1) { p2Score++; 
         }
         court->drawScore(p1Score, p2Score);  
-        char ch;
-        while( !(ch=getch()) ) {;}
     }
     endOfGame(p1Score, p2Score);
 }
@@ -67,8 +65,7 @@ void endOfGame(int p1Score, int p2Score) {
     int y = getmaxy(curscr) /3;
     int x = getmaxx(curscr) / 3;
     printToScreen(message, x, y);
-    sprintf(message, "Play again? y/n");
-    printToScreen(message, x, y + 1);
+    printToScreen("Play again? y/n", x, y + 1);
 
     while(TRUE) {
         char ch = getch();
@@ -78,9 +75,9 @@ void endOfGame(int p1Score, int p2Score) {
                 printToScreen("                        ", x, y+1);
                 play(1);
                 return;
-            case 'n':
+            case 'n': 
                 endwin();
-                return;
+                exit(0);
             default:;
         }
     }
@@ -94,7 +91,7 @@ void endOfGame(int p1Score, int p2Score) {
  *      1 if player 1 scored
  *      2 if player 2 scored
  */
-int round(Paddle *p1, Paddle *p2) {
+int round(Paddle *p1, AIPaddle *p2) {
     Ball b;
     int score = 0;
     char ch;
@@ -130,7 +127,7 @@ int round(Paddle *p1, Paddle *p2) {
             case 'p':
                 pause();
                 break;     
-            default: ;
+            default: p2->update(&b);;
                 
         }
         
