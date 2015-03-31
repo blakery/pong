@@ -96,44 +96,36 @@ int round(Paddle *p1, AIPaddle *p2) {
     int score = 0;
     char ch;
 
+    // Wait for a key to be pressed (a paddle movement key or the spacebar)
     while(TRUE) {
         ch=getch();
-        if(ch == 'w' || ch == 's' || ch == 'i' || ch == 'k' || ch == 'p'
-           || ch == ' ') { break; 
+        if(ch == 'w' || ch == 's' || ch == 'i' || ch == 'k' || ch == ' ') { 
+           b.serve();               
+           break; 
         } else if(ch == 'q') { 
             quit();
         }
     }
-    b.serve();    
+
     while( !(score) ) {
         ch = getch();
-
         switch (ch) {
-            case 'q': 
-                quit(); // Note: this could return (quit() propts)         
+            case 'q': quit(); // Note: this could return (quit() propts)         
+                break;
+            case 'p': pause();
+                break;                   
+            case 'w': if(p1) p1->up(); 
+                break;
+            case 's': if(p1) p1->down();
+                break;
+            case 'i': if(p2) p2->up(); 
                 break; 
-            case 'w': 
-                if(p1) p1->up(); 
-                break;
-            case 's': 
-                if(p1) p1->down();
-                break;
-            case 'i':
-                if(p2) p2->up(); 
-                break; 
-            case 'k':
-                if(p2) p2->down();
-                break;
-            case 'p':
-                pause();
-                break;     
+            case 'k': if(p2) p2->down();
+                break;   
             default: p2->update(&b);;
                 
-        }
-        
-
+        }  
         score = b.move_ball(p1, p2);
-
     }
     return score;
 }
