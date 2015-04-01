@@ -44,6 +44,8 @@ void play(int nPlayers) {
         }
         court->drawScore(p1Score, p2Score);  
     }
+    p1->erase();
+    p2->erase();
     endOfGame(p1Score, p2Score);
 }
 

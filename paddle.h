@@ -11,6 +11,7 @@ public:
     void down();
     void reset();
     int contact(int x, int y);
+    void erase();
 
 protected: 
     int paddle_top;
@@ -19,7 +20,6 @@ protected:
     // this may be custumizable at some point, for difficulty level
     int paddle_length;
     void draw();
-    void erase();
 
 };
 

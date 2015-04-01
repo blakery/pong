@@ -1,5 +1,6 @@
 #include "aipaddle.h"
 #include "ball.h"
+#include "curses.h"
 #include "paddle.h"
 
 
@@ -11,13 +12,16 @@
  * the direction of the ball
  */
 void AIPaddle::update(Ball *b) {
+    int half_court = getmaxx(curscr) / 2;
     
-    if( b->y() < paddle_top ) {
-        up();
-    } else if (b->y() > (paddle_top + paddle_length) ){
-        down();
+    if(delay_count++ < delay) { return;
+    // only move if the ball is on this half of the court
+    } else if(b->x() < paddle_axis  &&  b->x() < half_court) { return;
+    } else if(b->x() > paddle_axis  &&  b->x() > half_court) { return;
+    } else if( b->y() < paddle_top ) { up();
+    } else if (b->y() > (paddle_top + paddle_length) ){ down();
     }
-    
+    delay_count=0;
 
 }
 
