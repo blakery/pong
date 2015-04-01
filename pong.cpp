@@ -50,9 +50,9 @@ void play(int nPlayers) {
 
 void endOfGame(int p1Score, int p2Score) {
     const char *winner;
-    int points;
+    int points, y = getmaxy(curscr) / 3, x = getmaxx(curscr) / 3;
     char message[24];
-    
+
     if(p1Score > p2Score) { 
         winner = "Player 1";
         points = p1Score;
@@ -62,21 +62,18 @@ void endOfGame(int p1Score, int p2Score) {
     }
     
     sprintf(message, "%s won with %d points.", winner, points);
-    int y = getmaxy(curscr) /3;
-    int x = getmaxx(curscr) / 3;
     printToScreen(message, x, y);
     printToScreen("Play again? y/n", x, y + 1);
 
     while(TRUE) {
         char ch = getch();
         switch (ch) {
-            case 'y': 
-                printToScreen("                        ", x, y);
+            case 'y':
+                printToScreen("                           ", x, y);
                 printToScreen("                        ", x, y+1);
                 play(1);
                 return;
-            case 'n': 
-                endwin();
+            case 'n': endwin();
                 exit(0);
             default:;
         }
