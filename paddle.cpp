@@ -106,7 +106,7 @@ int Paddle::contact(int x, int y) {
       // the ball is checked for scoring before paddle contact, 
       // so there's no need to figure out which side of the paddle we care about
     } else if(x == paddle_axis + 1 || x == paddle_axis - 1) {
-        if(y > paddle_top && y < paddle_top + paddle_length) {
+        if(y >= paddle_top && y <= paddle_top + paddle_length) {
             return 1;
         }
     }

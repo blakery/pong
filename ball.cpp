@@ -64,7 +64,7 @@ void Ball::serve() {
     x_speed = random() % BALL_SPEED_MIN;
     y_speed = random() % BALL_SPEED_MIN;
 
-    // This looks counter-intuitive, but note that lowe numbers are higher
+    // This looks counter-intuitive, but note that lower numbers are faster
     if(x_speed < BALL_SPEED_MAX ) { x_speed = BALL_SPEED_MAX; }
     if(y_speed < BALL_SPEED_MAX ) { y_speed = BALL_SPEED_MAX; }
     
